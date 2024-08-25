@@ -1,9 +1,8 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Button } from "./MovingBorders";
+import Image from "next/image";
 
 type Card = {
   id: number;
@@ -27,44 +26,26 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
   };
 
   return (
-    // change md:grid-cols-3 to md:grid-cols-4, gap-4 to gap-10
-    <div className="w-full h-full p-10 grid grid-cols-1 md:grid-cols-4 max-w-7xl mx-auto gap-10 ">
+    <div className="w-full h-full p-10 grid grid-cols-1 md:grid-cols-3  max-w-7xl mx-auto gap-4 relative">
       {cards.map((card, i) => (
-        <Button
-          key={i}
-          borderRadius="1.75rem"
-          //   default is 2000
-          duration={10000}
-          //   add className={cn(card.className, "")}
-          className={cn(
-            card.className
-            // "bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
-          )}
-        >
-          <div
+        <div key={i} className={cn(card.className, "")}>
+          <motion.div
+            onClick={() => handleClick(card)}
             className={cn(
               card.className,
-              "relative border-3 border-yellow-500"
+              "relative overflow-hidden",
+              selected?.id === card.id
+                ? "rounded-lg cursor-pointer absolute inset-0 h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col"
+                : lastSelected?.id === card.id
+                ? "z-40 bg-white rounded-xl h-full w-full"
+                : "bg-white rounded-xl h-full w-full"
             )}
+            layoutId={`card-${card.id}`}
           >
-            <motion.div
-              onClick={() => handleClick(card)}
-              className={cn(
-                card.className,
-                "relative overflow-hidden",
-                selected?.id === card.id
-                  ? "rounded-lg cursor-pointer absolute inset-0 h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col"
-                  : lastSelected?.id === card.id
-                  ? "z-40 bg-white rounded-xl h-full w-full"
-                  : "bg-white rounded-xl h-full w-full"
-              )}
-              layout
-            >
-              {selected?.id === card.id && <SelectedCard selected={selected} />}
-              <BlurImage card={card} />
-            </motion.div>
-          </div>
-        </Button>
+            {selected?.id === card.id && <SelectedCard selected={selected} />}
+            <ImageComponent card={card} />
+          </motion.div>
+        </div>
       ))}
       <motion.div
         onClick={handleOutsideClick}
@@ -78,18 +59,15 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
   );
 };
 
-const BlurImage = ({ card }: { card: Card }) => {
-  const [loaded, setLoaded] = useState(false);
+const ImageComponent = ({ card }: { card: Card }) => {
   return (
-    <Image
+    <motion.img
+      layoutId={`image-${card.id}-image`}
       src={card.thumbnail}
-      //   change image scale 500 to 100
-      height="100"
-      width="100"
-      onLoad={() => setLoaded(true)}
+      height="500"
+      width="500"
       className={cn(
-        "object-cover object-top absolute inset-0 h-full w-full transition duration-200",
-        loaded ? "blur-none" : "blur-md"
+        "object-cover object-top absolute inset-0 h-full w-full transition duration-200"
       )}
       alt="thumbnail"
     />
@@ -109,6 +87,7 @@ const SelectedCard = ({ selected }: { selected: Card | null }) => {
         className="absolute inset-0 h-full w-full bg-black opacity-60 z-10"
       />
       <motion.div
+        layoutId={`content-${selected?.id}`}
         initial={{
           opacity: 0,
           y: 100,
@@ -116,6 +95,10 @@ const SelectedCard = ({ selected }: { selected: Card | null }) => {
         animate={{
           opacity: 1,
           y: 0,
+        }}
+        exit={{
+          opacity: 0,
+          y: 100,
         }}
         transition={{
           duration: 0.3,

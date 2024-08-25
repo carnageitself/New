@@ -1,3 +1,21 @@
+import nextjs from "@/public/next.png";
+import firebase from "@/public/firebase.png";
+import bootstrap from "@/public/bootstrap.png";
+import git from "@/public/git.png";
+import express from "@/public/expressJS.png";
+import vite from "@/public/vite.png";
+import mongodb from "@/public/mongodb.png";
+import nodejs from "@/public/nodejs.png";
+import reactjs from "@/public/reactjs.png";
+import solidity from "@/public/solidity.png";
+import tailwind from "@/public/tailwind.png";
+import typescript from "@/public/typescript.png";
+import threejs from "@/public/three.png";
+import python from "@/public/python.png";
+import tableau from "@/public/tableau.png";
+import powerbi from "@/public/powerbi.png";
+import mysql from "@/public/mysql.png";
+
 export const navItems = [
   { name: "About", link: "#about" },
   { name: "Projects", link: "#projects" },
@@ -205,13 +223,106 @@ export const socialMedia = [
   {
     id: 1,
     img: "/git.svg",
+    title: "Github",
+    href: "https://github.com/carnageitself",
   },
   {
     id: 2,
     img: "/twit.svg",
+    title: "Github",
+    href: "https://github.com/carnageitself",
   },
   {
     id: 3,
     img: "/link.svg",
+    title: "Github",
+    href: "https://github.com/carnageitself",
+  },
+  {
+    id: 4,
+    img: "/link.svg",
+    title: "Github",
+    href: "https://github.com/carnageitself",
+  },
+  {
+    id: 5,
+    img: "/link.svg",
+    title: "Github",
+    href: "https://github.com/carnageitself",
+  },
+];
+
+export const technologies = [
+  {
+    name: "typeScript",
+    icon: typescript,
+  },
+  {
+    name: "MongoDB",
+    icon: mongodb,
+  },
+  {
+    name: "Express JS",
+    icon: express,
+  },
+  {
+    name: "React JS",
+    icon: reactjs,
+  },
+  {
+    name: "Node JS",
+    icon: nodejs,
+  },
+
+  {
+    name: "Next JS",
+    icon: nextjs,
+  },
+  {
+    name: "firebase",
+    icon: firebase,
+  },
+
+  {
+    name: "Solidity",
+    icon: solidity,
+  },
+
+  {
+    name: "Three JS",
+    icon: threejs,
+  },
+  // {
+  //   name: "git",
+  //   icon: git,
+  // },
+
+  {
+    name: "Power Bi",
+    icon: powerbi,
+  },
+  {
+    name: "Tableau",
+    icon: tableau,
+  },
+  {
+    name: "My SQL",
+    icon: mysql,
+  },
+  {
+    name: "python",
+    icon: python,
+  },
+  {
+    name: "Vite JS",
+    icon: vite,
+  },
+  {
+    name: "Tailwind CSS",
+    icon: tailwind,
+  },
+  {
+    name: "bootstrap",
+    icon: bootstrap,
   },
 ];

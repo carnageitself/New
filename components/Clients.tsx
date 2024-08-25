@@ -1,52 +1,52 @@
 "use client";
-
 import React from "react";
+import { AnimatedTooltip } from "@/components/ui/AnimatedTooltip";
+import yash from "@/public/yash.png";
+import { BsGithub } from "react-icons/bs";
+import { LuInstagram } from "react-icons/lu";
+const people = [
+  {
+    id: 1,
+    name: "John Doe",
+    designation: "Software Engineer",
+    image: yash,
+  },
+  {
+    id: 2,
+    name: "Robert Johnson",
+    designation: "Product Manager",
+    image: yash,
+  },
+  {
+    id: 3,
+    name: "Jane Smith",
+    designation: "Data Scientist",
+    image: yash,
+  },
+  {
+    id: 4,
+    name: "Emily Davis",
+    designation: "UX Designer",
+    image: yash,
+  },
+  {
+    id: 5,
+    name: "Tyler Durden",
+    designation: "Soap Developer",
+    image: yash,
+  },
+  {
+    id: 6,
+    name: "Dora",
+    designation: "The Explorer",
+    image: yash,
+  },
+];
 
-import { companies, testimonials } from "@/data";
-import { InfiniteMovingCards } from "./ui/InfiniteCards";
-
-const Clients = () => {
+export function Clients() {
   return (
-    <section id="testimonials" className="py-20">
-      <h1 className="heading">
-        Kind words from
-        <span className="text-purple"> satisfied clients</span>
-      </h1>
-
-      <div className="flex flex-col items-center max-lg:mt-10">
-        <div
-          // remove bg-white dark:bg-black dark:bg-grid-white/[0.05], h-[40rem] to 30rem , md:h-[30rem] are for the responsive design
-          className="h-[50vh] md:h-[30rem] rounded-md flex flex-col antialiased  items-center justify-center relative overflow-hidden"
-        >
-          <InfiniteMovingCards
-            items={testimonials}
-            direction="right"
-            speed="slow"
-          />
-        </div>
-
-        <div className="flex flex-wrap items-center justify-center gap-4 md:gap-16 max-lg:mt-10">
-          {companies.map((company) => (
-            <React.Fragment key={company.id}>
-              <div className="flex md:max-w-60 max-w-32 gap-2">
-                <img
-                  src={company.img}
-                  alt={company.name}
-                  className="md:w-10 w-5"
-                />
-                <img
-                  src={company.nameImg}
-                  alt={company.name}
-                  width={company.id === 4 || company.id === 5 ? 100 : 150}
-                  className="md:w-24 w-20"
-                />
-              </div>
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
-    </section>
+    <div className="flex flex-row items-center justify-center mb-10 w-full">
+      <AnimatedTooltip items={people} />
+    </div>
   );
-};
-
-export default Clients;
+}
